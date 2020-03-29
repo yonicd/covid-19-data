@@ -10,6 +10,10 @@ We have used this data to power our [maps](https://www.nytimes.com/interactive/2
 
 The data begins with the first reported coronavirus case in Washington State on Jan. 21, 2020. We will publish regular updates to the data in this repository. 
 
+## Log Plots
+
+![](layout.png)
+
 ## United States Data
 
 Data on cumulative coronavirus cases and deaths can be found in two files for states and counties.
