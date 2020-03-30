@@ -10,9 +10,61 @@ We have used this data to power our [maps](https://www.nytimes.com/interactive/2
 
 The data begins with the first reported coronavirus case in Washington State on Jan. 21, 2020. We will publish regular updates to the data in this repository. 
 
-## Log Plots
+## Animation
 
-![](layout.png)
+### Cases
+
+![](states_cases.gif)
+
+### Deaths
+
+![](states_death.gif)
+
+## Static
+
+### Region
+
+![](region_cases.png)
+
+![](region_deaths.png)
+
+### States
+
+![](state_cases.png)
+
+![](state_deaths.png)
+
+### Counties
+
+#### North Central
+
+![](county_North_Central_cases.png)
+
+![](county_North_Central_deaths.png)
+
+#### Northeast
+
+![](county_Northeast_cases.png)
+
+![](county_Northeast_deaths.png)
+
+#### South
+
+![](county_South_cases.png)
+
+![](county_South_deaths.png)
+
+#### West
+
+![](county_West_cases.png)
+
+![](county_West_deaths.png)
+
+#### Territory
+
+![](county_Territory_cases.png)
+
+![](county_Territory_deaths.png)
 
 ## United States Data
 
