@@ -109,7 +109,7 @@ p_county <- county_input%>%
     label_by = 'county',
     path_by = 'county',
     facet_by = 'state',
-    lab_scale = 50
+    lab_scale = 10
   )
 
 purrr::iwalk(p_county,function(x,y) ggsave(file = glue::glue('county_{gsub("\\\\s","_",y)}_deaths.png'),x,width = 10,height = 10))
