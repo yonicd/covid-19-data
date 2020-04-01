@@ -37,7 +37,7 @@ purrr::walk(c('deaths','cases'),.f=function(x,data){
       lab_scale = 10
     )
 
-  purrr::iwalk(p_county,function(xx,y) ggsave(file = glue::glue('county_{gsub("\\\\s","_",y)}_{x}.png'),xx,width = 10,height = 10))
+  purrr::iwalk(p,function(xx,y) ggsave(file = glue::glue('county_{gsub("\\\\s","_",y)}_{x}.png'),xx,width = 10,height = 10))
 
 },data = county_input%>%foo_roll('county'))
 
