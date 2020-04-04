@@ -19,7 +19,7 @@ foo_labs <- function(dat,by,scale = 100){
     dplyr::filter(cases>max(cases,na.rm = TRUE)/scale)
 }
 
-foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_scale = 100){
+foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_scale = 100,add_labs = TRUE){
 
   dat_labs <- dat%>%
     foo_labs(by = c(facet_by,label_by),scale = lab_scale)
@@ -31,12 +31,6 @@ foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_
     geom_path(aes(group=!!rlang::sym(path_by),colour=as.numeric(date)),
               na.rm = TRUE,show.legend = FALSE) +
     geom_point(data = dat_labs,na.rm = TRUE) +
-    ggrepel::geom_label_repel(aes(label = !!rlang::sym(path_by)),
-                              data = dat_labs,
-                              nudge_x = 10,
-                              segment.color = 'grey80',
-                              size = 2,
-                              na.rm = TRUE) +
     scale_y_log10()+
     scale_x_log10() +
     labs(y = glue::glue('New {capfirst(metric)}\n({attr(dat,"window")} Day Rolling Sum)'),
@@ -47,6 +41,12 @@ foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_
 
   if(!is.null(facet_by))
     p <- p + facet_wrap(as.formula(glue::glue('~{facet_by}')))
+
+  if(add_labs)
+   p <- p + ggrepel::geom_label_repel(aes(label = !!rlang::sym(path_by)),data = dat_labs,nudge_x = 10,
+                                segment.color = 'grey80',
+                                size = 2,
+                                na.rm = TRUE)
 
   p
 
