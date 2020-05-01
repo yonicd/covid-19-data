@@ -124,11 +124,13 @@ For those reasons, our data will in some cases not exactly match with the inform
 
 Confirmed cases are patients who test positive for the coronavirus. We consider a case confirmed when it is reported by a federal, state, territorial or local government agency.
 
-* "Probable" Cases
+* "Probable" Cases and Deaths
 
-Some states and counties are starting to report "probable" Covid-19 cases and deaths that do not have a positive laboratory test. For the time being, we are attempting to continue only counting lab-confirmed cases and deaths while we explore the possibility of switching methodologies or reporting both numbers separately.
+On April 5, the Council of State and Territorial Epidemiologists Centers [advised states](https://int.nyt.com/data/documenthelper/6908-cste-interim-20-id-01-covid-19/85d47e89b637cd643d50/optimized/full.pdf) to include both confirmed cases, based on laboratory testing, and probable cases, based on specific criteria for symptoms and exposure. The Centers for Disease Control adopted these definitions and national CDC data began including confirmed and probable cases on April 14.
 
-However, in Colorado, Ohio, Pennsylvania and Virginia health authorities have stopped reporting a lab-confirmed only number and so our numbers for those areas include "probable" cases. In Idaho our cases number is only lab-confirmed cases, but deaths include deaths of "probable" cases.
+Some states and counties are starting to report these "probable" Covid-19 cases and deaths. For the time being, we are attempting to continue only counting lab-confirmed cases and deaths while we explore the possibility of switching methodologies or reporting both numbers separately.
+
+Please see the Geographic Exceptions section below for more details.
 
 * Dates
 
@@ -154,7 +156,7 @@ Sometimes, cases are first reported in one county and then moved to another coun
 
 * New York
 
-All cases for the five boroughs of New York City (New York, Kings, Queens, Bronx and Richmond counties) are assigned to a single area called New York City. There is a large jump in the number of deaths on April 6th due to switching from data from New York City to data from New York state for deaths.
+All cases for the five boroughs of New York City (New York, Kings, Queens, Bronx and Richmond counties) are assigned to a single area called New York City. There is a large jump in the number of deaths on April 6th due to switching from data from New York City to data from New York state for deaths. We are not currently including the probable deaths reported by New York City.
 
 For all New York state counties, starting on April 8th we are reporting deaths by place of fatality instead of residence of individual. There were no new deaths reported by the state on April 17th or April 18th.
 
@@ -164,7 +166,7 @@ Starting April 12th, our case count excludes cases labeled by the state as "Non-
 
 * Alabama
 
-Alabama's numbers for April 17th contained an [error](https://twitter.com/ALPublicHealth/status/1251531524958289920) in reporting of lab test results that the state is working to correct.
+Alabama's numbers for April 17th contained an [error](https://twitter.com/ALPublicHealth/status/1251531524958289920) in reporting of lab test results that the state is working to correct. The number of deaths drops on April 23rd for an unknown reason.
 
 * Kansas City, Mo.
 
@@ -188,10 +190,35 @@ Counts for Guam include cases reported from the USS Theodore Roosevelt.
 
 * Puerto Rico
 
-We are trying to resolve some inconsistencies with our Puerto Rico data. Starting April 21st, the territory's health department revised their number of cases downward, saying they had been double counting some coronavirus patients in official reports, leading to a higher number of cases reported than actually confirmed. The territory's online dashboard is not yet updated.
+On April 21st, the territory's health department revised their number of cases downward, saying they had been double counting some coronavirus patients in official reports, leading to a higher number of cases reported than actually confirmed. 
 
-Additionally, from approximately April 12th through April 18th, the count of deaths for Puerto Rico include some probable Covid-19 related deaths that were not lab-confirmed. We will revise the numbers for these dates as possible.
+Additionally, from approximately April 12th through April 18th, the count of deaths for Puerto Rico include some probable Covid-19 related deaths that were not lab-confirmed. Starting April 19th these have been removed. We will revise the numbers for the 12th to 18th as possible.
 
+#### Probable Cases and Deaths
+
+* Colorado
+
+Numbers reflect the combined number of lab-confirmed and probable cases and deaths as reported by the state. On April 25th, the state revised downward the number of deaths after removing "about 29 duplicates" from the number of "probable deaths" included in the total.
+
+* Idaho
+
+The total cases number includes only lab-confirmed cases, but the deaths number does include the deaths of probable Covid-19 cases.
+
+* Louisiana
+
+The total cases number and total deaths number include only lab-confirmed cases and deaths. The state appears to be reporting the deaths of probable Covid-19 cases separately from the total number of deaths statewide or in each parish but we are not yet including those cases in our numbers.
+
+* Ohio
+
+The state reports lab-confirmed and probable cases and deaths separately at the state level but combine lab-confirmed and probable cases and deaths at the county level. Our statewide and county numbers combine both case types.
+
+* Pennsylvania
+
+The total cases number includes lab-confirmed and probable cases starting around April 16th, but the deaths number does not include probable deaths, except for on April 21st and April 22nd when it does.
+
+* Virginia
+
+The state reports lab-confirmed and probable cases and deaths separately at the state level but combine lab-confirmed and probable cases and deaths at the county level. Our statewide and county numbers combine both case types.
 
 ## License and Attribution
 
