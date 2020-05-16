@@ -2,7 +2,7 @@ foo_roll <- function(dat,by,window=7){
 
   ret <- dat%>%
     dplyr::group_by(!!!rlang::syms(by))%>%
-    dplyr::mutate_at(vars(cases,deaths),list(c=RcppRoll::roll_sumr),n=window)%>%
+    dplyr::mutate_at(vars(cases_new,deaths_new),list(c=RcppRoll::roll_sumr),n=window)%>%
     dplyr::ungroup()
 
   attr(ret,'window') <- window
@@ -10,13 +10,31 @@ foo_roll <- function(dat,by,window=7){
   ret
 }
 
-foo_labs <- function(dat,by,scale = 100){
+foo_labs <- function(dat,by,scale = 100,highlight, highlight_var = 'county',metric = 'cases'){
 
-  dat%>%
+  ret <- dat%>%
     dplyr::group_by(!!!rlang::syms(by))%>%
     slice(n())%>%
-    dplyr::ungroup()%>%
-    dplyr::filter(cases>max(cases,na.rm = TRUE)/scale)
+    dplyr::ungroup()
+
+  ret1 <- ret%>%
+    dplyr::filter((!!rlang::sym(metric)>max(!!rlang::sym(metric),na.rm = TRUE)/scale))
+
+  ret2 <- ret%>%
+    dplyr::filter(!!rlang::sym(highlight_var)%in%highlight)
+
+  dplyr::bind_rows(ret1,ret2)
+}
+
+foo_labs2 <- function(dat,by,scale = 2,metric = 'cases'){
+
+  sumdf <- dat%>%
+    dplyr::summarise(minc = min(!!rlang::sym(metric))*scale,maxc = max(!!rlang::sym(metric))/scale)
+
+  dat%>%
+    group_by(!!!rlang::syms(by))%>%
+    slice(n())%>%
+    dplyr::filter(!(dplyr::between(!!rlang::sym(metric),sumdf$minc,sumdf$maxc)))
 }
 
 foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_scale = 100,add_labs = TRUE){
@@ -25,12 +43,13 @@ foo_plot <- function(dat,metric = 'cases', label_by,path_by,facet_by = NULL,lab_
     foo_labs(by = c(facet_by,label_by),scale = lab_scale)
 
   p <- dat%>%
-    ggplot(aes(x=!!rlang::sym(glue::glue('{metric}_c')),
+    ggplot(aes(x=!!rlang::sym(glue::glue('{metric}_new_c')),
                y=!!rlang::sym(glue::glue('{metric}')))) +
     geom_abline(intercept=0,slope=1)+
-    geom_path(aes(group=!!rlang::sym(path_by),colour=as.numeric(date)),
+    geom_point(aes(group=!!rlang::sym(path_by)),
               na.rm = TRUE,show.legend = FALSE) +
-    geom_point(data = dat_labs,na.rm = TRUE) +
+    #geom_path(aes(group=!!rlang::sym(path_by)),na.rm = TRUE) +
+    #geom_point(data = dat_labs,na.rm = TRUE) +
     scale_y_log10()+
     scale_x_log10() +
     labs(y = glue::glue('New {capfirst(metric)}\n({attr(dat,"window")} Day Rolling Sum)'),
