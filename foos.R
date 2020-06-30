@@ -1,8 +1,8 @@
-foo_roll <- function(dat,by,window=7){
+foo_roll <- function(dat,by,window=7,vars = c('cases_new','deaths_new')){
 
   ret <- dat%>%
     dplyr::group_by(!!!rlang::syms(by))%>%
-    dplyr::mutate_at(vars(cases_new,deaths_new),list(c=RcppRoll::roll_sumr),n=window)%>%
+    dplyr::mutate_at(dplyr::vars(!!!rlang::syms(vars)),list(c=RcppRoll::roll_sumr),n=window)%>%
     dplyr::ungroup()
 
   attr(ret,'window') <- window
