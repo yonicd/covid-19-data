@@ -8,49 +8,10 @@ library(ggplot2)
 source('read_data.R')
 source('foos.R')
 
-# p <- function(dat,mf,metric,facet_by,highlight,highlight_var = 'county',dat_labs){
-#   dat%>%
-#     dplyr::filter(month%in%mf)%>%
-#     ggplot(aes(
-#       x = !!rlang::sym(glue::glue('{metric}')),
-#       y = !!rlang::sym(glue::glue('{metric}_new_c')))) +
-#     facet_wrap(as.formula(glue::glue('~{facet_by}'))) +
-#     geom_abline(intercept=0,slope=1,linetype = 2) +
-#     geom_path(na.rm = TRUE,aes(group = !!rlang::sym(path_by)),alpha = 0.25) +
-#     geom_path(data = dat%>%dplyr::filter(month%in%mf&!!rlang::sym(highlight_var)%in%highlight),
-#               na.rm = TRUE,aes(group = !!rlang::sym(path_by)),
-#               colour = 'red')+
-#     geom_point(data = dat_labs%>%dplyr::filter(month%in%mf),na.rm = TRUE) +
-#     scale_y_log10()+
-#     scale_x_log10() +
-#     ggrepel::geom_label_repel(aes(label = !!rlang::sym(path_by)),
-#                               data = dat_labs%>%dplyr::filter(month%in%mf)%>%dplyr::distinct(),
-#                               nudge_x = 3,
-#                               segment.color = 'grey80',
-#                               size = 2,
-#                               na.rm = TRUE) +
-#     labs(
-#       colour = 'Month',
-#       y = glue::glue('New {capfirst(metric)}\n({attr(dat,"window")} Day Rolling Sum)'),
-#       x = glue::glue('Total {capfirst(metric)}')
-#     ) +
-#     viridis::scale_colour_viridis(direction = -1,option = 'A',discrete = TRUE) +
-#     theme_minimal() +
-#     theme(axis.text = element_text(size=rel(0.5)),legend.position = 'top')
-# }
-
-
 facet_by <- 'state.region'
 path_by <- 'state.abb'
-metric <- 'cases'
-mf <- c('04-20','05-20')
-h_fl <- c('Alachua','Columbia','Levy','Marion','Putnam','Bradford','Clay','Suwannee','Gilchrist','Union')
-
-h_ct <- 'Hartford'
-h_ma <- 'Middlesex'
-h_il <- 'Cook'
-highlight <- c(h_ct,h_il)
-
+metric <- 'deaths'
+mf <- c('06-20','07-20')
 highlight <- c('MA','CT','FL')
 
 dat <- state_input%>%
@@ -70,10 +31,6 @@ dat_labs <- dat%>%
            scale = 100,
            highlight = highlight,
            highlight_var = 'state.abb',metric = metric)
-
-# ps <- purrr::map(mf,p,dat = dat,metric = metric,facet_by = facet_by,highlight = highlight,dat_labs = dat_labs,highlight_var = 'state.abb')
-# ps[[2]]
-# purrr::reduce(ps,`|`) + plot_layout(widths = c(1,2))
 
 dat2 <- dat%>%
   # dplyr::group_by(state.abb)%>%
@@ -135,6 +92,7 @@ dat4%>%
   scale_x_log10() +
   labs(
     y = glue::glue('New {capfirst(metric)} Rate of Growth\n({attr(dat,"window")} Day Rolling Sum)'),
-    x = glue::glue('Total {capfirst(metric)} Rate of Growth')
+    x = glue::glue('Total {capfirst(metric)} Rate of Growth'),
+    subtitle = paste0(range(dat4$date),collapse = ':')
   ) +
   theme_minimal()

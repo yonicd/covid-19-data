@@ -9,14 +9,14 @@ source('foos.R')
 facet_by <- 'state'
 path_by <- 'county'
 metric <- 'cases'
-mf <- c('04-20','05-20')
+mf <- c('05-20','06-20','07-20')
 h_fl <- c('Alachua','Columbia','Levy','Marion','Putnam','Bradford','Clay','Suwannee','Gilchrist','Union')
 
 h_ct <- 'Hartford'
 h_ma <- 'Middlesex'
 h_il <- 'Cook'
 h_fl <- 'Alachua'
-highlight <- c(h_fl)
+highlight <- c(h_ma)
 
 #highlight <- c('MA','CT','FL')
 
@@ -38,15 +38,11 @@ dat_labs <- dat%>%
            highlight = highlight,
            highlight_var = 'county',metric = metric)
 
-# ps <- purrr::map(mf,p,dat = dat,metric = metric,facet_by = facet_by,highlight = highlight,dat_labs = dat_labs,highlight_var = 'state.abb')
-# ps[[2]]
-# purrr::reduce(ps,`|`) + plot_layout(widths = c(1,2))
-
 dat2 <- dat%>%
   # dplyr::group_by(county)%>%
   # dplyr::filter(date>=max(date)-28)%>%
   # dplyr::ungroup()%>%
-  dplyr::filter(month%in%c('05-20','06-20'))%>%
+  dplyr::filter(month%in%mf)%>%
   dplyr::select(date,state.region,fips,state.abb,county,!!rlang::sym(metric),!!rlang::sym(glue::glue('{metric}_new_c')))
 
 dat3 <- dat2%>%
@@ -70,7 +66,7 @@ dat4 <- dat2%>%
     !!rlang::sym(metric) := !!rlang::sym(metric)/!!rlang::sym(glue::glue('{metric}1')),
     !!rlang::sym(glue::glue('{metric}_new_c')) := !!rlang::sym(glue::glue('{metric}_new_c'))/!!rlang::sym(glue::glue('{metric}_new_c1')),
   )%>%
-  dplyr::filter(state.abb%in%c('WA'))%>%
+  dplyr::filter(state.abb%in%c('MA'))%>%
   dplyr::filter(!county%in%'Unknown')%>%
   # dplyr::left_join(flc_df,by='county')%>%
   identity()

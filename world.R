@@ -29,7 +29,8 @@ world_dat <- world%>%
 
   },.id = 'country')
 
-mf <- c('04-20','05-20')
+mf <- c('05-20','06-20','07-20')
+mf_lab <- '07-20'
 facet_by <- 'region'
 path_by <- 'country'
 metric <- 'cases'
@@ -66,19 +67,15 @@ world_roll_unit <- world_roll%>%
   )
 
 world_labs <- world_roll%>%
-  foo_labs(by = c(facet_by,path_by,'month'),scale = 100,highlight = h_c,
-           highlight_var = 'country',metric = 'cases')
+  foo_labs(by = c(facet_by,path_by,'month'),
+           scale = 100,
+           highlight = h_c,
+           highlight_var = 'country',
+           metric = 'cases')
 
 world_labs_unit <- world_roll_unit%>%
   foo_labs(by = c(facet_by,path_by,'month'),scale = 1,highlight = h_c,
            highlight_var = 'country',metric='deaths')
-
-# ps <- purrr::map(mf,p,dat = world_roll,metric = metric,facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs)
-#
-# p(dat = world_roll,mf = mf,metric = metric,facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs)
-#
-# purrr::reduce(ps,`+`) + plot_layout(design = 'BCA')
-
 
 p_colour <- function(dat,mf,metric,facet_by,highlight,highlight_var = 'county',dat_labs,ribbon = FALSE){
   p <- dat%>%
@@ -125,33 +122,33 @@ facet_by_new <- 'world'
 
 top_ten <- world_roll%>%dplyr::group_by(country)%>%dplyr::filter(date==max(date))%>%dplyr::ungroup()%>%dplyr::arrange(dplyr::desc(cases_new))%>%slice(1:20)%>%dplyr::pull(country)
 
-p_cases <- p_colour(dat = world_roll%>%dplyr::filter(country%in%top_ten),mf = mf,metric = 'cases',facet_by = facet_by_new,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_cases%>%dplyr::filter(month=='05-20')%>%dplyr::filter(country%in%top_ten))
+p_cases <- p_colour(dat = world_roll%>%dplyr::filter(country%in%top_ten),mf = mf,metric = 'cases',facet_by = facet_by_new,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_cases%>%dplyr::filter(month==mf_lab)%>%dplyr::filter(country%in%top_ten))
 
 world_labs_deaths <- world_roll%>%
   foo_labs(by = c(facet_by,path_by,'month'),scale = 100,highlight = h_c,
            highlight_var = 'country',metric = 'deaths')
 
-p_deaths <- p_colour(dat = world_roll%>%dplyr::filter(region%in%regs),mf = mf,metric = 'deaths',facet_by = facet_by_new,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_deaths%>%dplyr::filter(month=='05-20')%>%dplyr::filter(region%in%regs))
-
-p_cases +
-  geom_hline(
-    aes(yintercept = cases_new_c),
-    data = world_labs_cases%>%
-      dplyr::filter(month=='05-20')%>%
-      dplyr::filter(country%in%"Sweden")%>%
-      dplyr::select(-region),linetype = 1)
+p_deaths <- p_colour(dat = world_roll%>%dplyr::filter(region%in%regs),mf = mf,metric = 'deaths',facet_by = facet_by_new,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_deaths%>%dplyr::filter(month==mf_lab)%>%dplyr::filter(region%in%regs))
 
 world_labs_cases_unit <- world_roll_unit%>%
   foo_labs(by = c(facet_by,path_by,'month'),scale = 100,highlight = h_c,highlight_var = 'country',metric = 'cases')
 
 top_ten <- world_roll_unit%>%dplyr::group_by(country)%>%dplyr::filter(date==max(date))%>%dplyr::ungroup()%>%dplyr::arrange(dplyr::desc(cases_new_c))%>%slice(1:20)%>%dplyr::pull(country)
 
-p_cases_unit <- p_colour(dat = world_roll_unit%>%dplyr::filter(region%in%regs),mf = mf,metric = 'cases',facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_cases_unit%>%dplyr::filter(month=='05-20')%>%dplyr::filter(region%in%regs),ribbon = TRUE)
+p_cases_unit <- p_colour(dat = world_roll_unit%>%dplyr::filter(region%in%regs),mf = mf,metric = 'cases',facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_cases_unit%>%dplyr::filter(month==mf_lab)%>%dplyr::filter(region%in%regs),ribbon = TRUE)
 
 
 world_labs_deaths_unit <- world_roll_unit%>%
   foo_labs(by = c(facet_by,path_by,'month'),scale = 100,highlight = h_c,highlight_var = 'country',metric = 'deaths')
 
-p_deaths_unit <- p_colour(dat = world_roll_unit%>%dplyr::filter(region%in%regs),mf = mf,metric = 'deaths',facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_deaths_unit%>%dplyr::filter(month=='05-20')%>%dplyr::filter(region%in%regs))
+p_deaths_unit <- p_colour(dat = world_roll_unit%>%dplyr::filter(region%in%regs),mf = mf,metric = 'deaths',facet_by = facet_by,highlight = highlight,highlight_var = 'country',dat_labs = world_labs_deaths_unit%>%dplyr::filter(month==mf_lab)%>%dplyr::filter(region%in%regs))
+
+p_cases +
+  geom_hline(
+    aes(yintercept = cases_new_c),
+    data = world_labs_cases%>%
+      dplyr::filter(month==mf_lab)%>%
+      dplyr::filter(country%in%"Sweden")%>%
+      dplyr::select(-region),linetype = 1)
 
 p_cases_unit / p_deaths_unit
