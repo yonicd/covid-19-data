@@ -29,7 +29,7 @@ world_dat <- world%>%
 
   },.id = 'country')
 
-mf <- c('05-20','06-20','07-20')
+mf <- c('03-20','04-20','05-20','06-20','07-20')
 mf_lab <- '07-20'
 facet_by <- 'region'
 path_by <- 'country'

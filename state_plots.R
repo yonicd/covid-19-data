@@ -11,7 +11,7 @@ source('foos.R')
 facet_by <- 'state.region'
 path_by <- 'state.abb'
 metric <- 'deaths'
-mf <- c('06-20','07-20')
+mf <- c('05-20','06-20','07-20')
 highlight <- c('MA','CT','FL')
 
 dat <- state_input%>%
@@ -36,7 +36,7 @@ dat2 <- dat%>%
   # dplyr::group_by(state.abb)%>%
   # dplyr::filter(date>=max(date)-14)%>%
   # dplyr::ungroup()%>%
-  dplyr::filter(month%in%c('05-20','06-20'))%>%
+  dplyr::filter(month%in%mf)%>%
   dplyr::select(date,state.region,state.abb,!!rlang::sym(metric),!!rlang::sym(glue::glue('{metric}_new_c')))
 
 dat3 <- dat2%>%
