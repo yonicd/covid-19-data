@@ -4,7 +4,7 @@ library(ggplot2)
 
 source('foos.R')
 
-fl_covid <- readr::read_csv('Florida_COVID19_Case_Line_Data.csv')
+fl_covid <- readr::read_csv('https://opendata.arcgis.com/datasets/37abda537d17458bae6677b8ab75fcb9_0.csv')
 
 flc_df <- flct[[1]]
 names(flc_df) <- c('region','county_str')
