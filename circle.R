@@ -17,6 +17,8 @@ lockdown_table <- dplyr::bind_rows(lockdown_table,lockdown_dc)
 lockdown_table$start <- as.Date(gsub('- (.*?)$','',lockdown_table$dates),format = '%b %d')
 lockdown_table$end <- as.Date(gsub('^(.*?)- ','',lockdown_table$dates),format = '%b %d')
 
+gh_lockdown <- readr::read_csv('https://raw.githubusercontent.com/COVID19StatePolicy/SocialDistancing/master/data/USstatesCov19distancingpolicy.csv')
+
 l <- 14
 
 plot_dat <- dat %>%

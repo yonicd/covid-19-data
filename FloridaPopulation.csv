@@ -58,7 +58,7 @@ Bradford,Total,"28,455"
 Brevard,1-4,"5,141"
 Brevard,5-9,"22,522"
 Brevard,10-14,"29,310"
-Brevard,14-Oct,"31,812"
+Brevard,10-14,"31,812"
 Brevard,15-19,"31,594"
 Brevard,20-24,"30,798"
 Brevard,25-34,"67,750"
@@ -72,7 +72,7 @@ Brevard,Total,"593,372"
 Broward,1-4,"21,510"
 Broward,5-9,"90,199"
 Broward,10-14,"111,338"
-Broward,14-Oct,"115,388"
+Broward,10-14,"115,388"
 Broward,15-19,"110,253"
 Broward,20-24,"110,445"
 Broward,25-34,"260,664"
@@ -86,7 +86,7 @@ Broward,Total,"1,927,014"
 Calhoun,1-4,116
 Calhoun,5-9,621
 Calhoun,10-14,837
-Calhoun,14-Oct,938
+Calhoun,10-14,938
 Calhoun,15-19,796
 Calhoun,20-24,806
 Calhoun,25-34,"2,169"
@@ -100,7 +100,7 @@ Calhoun,Total,"14,982"
 Charlotte,1-4,930
 Charlotte,5-9,"4,527"
 Charlotte,10-14,"5,706"
-Charlotte,14-Oct,"6,418"
+Charlotte,10-14,"6,418"
 Charlotte,15-19,"6,617"
 Charlotte,20-24,"6,811"
 Charlotte,25-34,"14,134"
@@ -938,6 +938,3 @@ Washington,75-84,"1,414"
 Washington,85+,375
 Washington,Total,"25,347"
 Total,Total,"21,268,553"
-,,
-,,
-,,
