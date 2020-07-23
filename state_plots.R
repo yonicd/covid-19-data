@@ -10,7 +10,7 @@ source('foos.R')
 
 facet_by <- 'state.region'
 path_by <- 'state.abb'
-metric <- 'deaths'
+metric <- 'cases'
 mf <- c('05-20','06-20','07-20')
 highlight <- c('MA','CT','FL')
 

@@ -37,7 +37,7 @@ plot_dat <- plot_dat%>%dplyr::left_join(lockdown_table%>%dplyr::select(-dates),b
 lab_dates <- pretty(plot_dat$date)
 
 plot_dat%>%
-  dplyr::filter(state.region %in% c("North Central")) %>%
+  dplyr::filter(state.region %in% c("West")) %>%
   ggplot(aes(x = cases, y = deaths_new_c)) +
   geom_path(aes(colour = lockdown),na.rm = TRUE) +
   facet_wrap(~state.abb, scales = "free") +
